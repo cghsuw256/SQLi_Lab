@@ -1,0 +1,15 @@
+{% extends "lab/base.html" %}
+{% block content %}
+  <h1>SQL Injection 실습 환경</h1>
+  <p class="lead">SQL Injection 공격을 시도해보세요</p>
+  {# action은 POST 요청을 보낼 주소, mode는 누른 버튼의 값이다. #}
+  <form method="post" action="{% url 'lab:login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p class="actions">
+      <button type="submit" name="mode" value="vulnerable">취약코드검색</button>
+      <button type="submit" name="mode" value="safe">안전코드검색</button>
+    </p>
+  </form>
+  <p class="nav"><a href="{% url 'lab:data' %}">인증 DB 데이터</a></p>
+{% endblock %}

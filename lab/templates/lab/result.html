@@ -1,0 +1,20 @@
+{% extends "lab/base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+  <h1>{{ title }}</h1>
+  {% if sql_text %}<p class="sql">SQL: {{ sql_text }}</p>{% endif %}
+  {% if params %}<p class="params">Params: {{ params }}</p>{% endif %}
+  {% if error %}
+    <p>{{ error }}</p>
+  {% elif results %}
+    <p class="result-label">데이터 결과:</p>
+    <ul>
+      {% for user in results %}
+        <li>({{ user.id }}, '{{ user.account }}', '{{ user.password }}', '{{ user.name }}', {{ user.age }})</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>일치하는 데이터가 없습니다.</p>
+  {% endif %}
+  <p class="nav"><a href="{% url 'lab:login' %}">다시 입력</a> | <a href="{% url 'lab:data' %}">목록</a></p>
+{% endblock %}
